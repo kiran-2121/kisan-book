@@ -1,0 +1,7 @@
+# Ignore editor-specific files
+.vscode/
+.idea/
+
+# Ignore temporary and build files
+node_modules/
+*.log
