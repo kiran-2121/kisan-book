@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<LoginForm/>} />
           <Route path='/otp' element={<OtpInputs/>} />
-          <Route path='/home' element={<Home/>} />
+          <Route path='/' element={<Home/>} />
         </Routes>
       </header>
     </div>

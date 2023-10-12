@@ -14,11 +14,10 @@ const signup = async (req, res) => {
       type: req.body.type,
     });
   
-    const user = await User.findOne({ email: userReq.email });
+    const user = await User.findOne({ phoneNumber: userReq.phoneNumber });
   
     if (user) {
       const isTypeExist = user.type.includes(req.body.type);
-      console.log(isTypeExist);
   
       if (isTypeExist) {
         return res.status(400).json({ message: "User is already present" });
@@ -68,7 +67,7 @@ const signup = async (req, res) => {
     const user = await User.findOne({ phoneNumber: phoneNumber });
   
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(400).send({ message: "User not found" });
     }
   
     const otp = otpGenerator.generate(4, {
@@ -101,8 +100,10 @@ const signup = async (req, res) => {
   };
 
   const verifyOtp = async (req, res) => {
-    const phoneNumber = req.body.mobileNumber;
+    const phoneNumber = req.body.mobile;
     const otp = req.body.otp;
+
+    console.log(phoneNumber,otp)
   
     const user = await User.findOne({ phoneNumber: phoneNumber });
   
