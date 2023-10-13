@@ -1,25 +1,16 @@
 import { useState } from "react";
 import OtpInput from "react-otp-input";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import ApiService from "../../service";
-import Modal from "react-bootstrap/Modal";
 
 const OtpInputs = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const mobile = location.state?.mobile;
 
   const [otp, setOtp] = useState(0);
-  const [error,setError]=useState();
-  const [show, setShow] = useState(false);
-
-  const showSuccess = () => {
-    setShow(true);
-    setTimeout(() => {
-      navigate('/home');
-    }, 2000);
-  };
+  const [error, setError] = useState();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -29,15 +20,14 @@ const OtpInputs = () => {
       .then((responce) => {
         console.log(responce);
         localStorage.setItem("token", responce.token);
-        showSuccess();
-        
+        navigate("/home");
       })
-      .catch((error)=>{
-        if(error.response){
-          console.log(error.response.data); 
-          setError(error.response.data); 
-          }
-      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+          setError(error.response.data);
+        }
+      });
 
     // axios.post(`${process.env.REACT_APP_baseUrl}/api/auth/verify`,mobileNumber )
     // .then(
@@ -54,50 +44,47 @@ const OtpInputs = () => {
 
   return (
     <>
-    <div className="row d-flex justify-content-center align-items-center vh-100">
-      <div className="col-md-4 col-sm-6">
-        <div className="card ">
-          <div className="card-body">
-            {/* <h3 className="card-title text-center">Enter OTP</h3> */}
-            <p className="text-center">Please enter the OTP sent to <br/>{'+'+mobile} </p>
+      <div className="row d-flex justify-content-center align-items-center vh-100">
+        <div className="col-md-4 col-sm-6">
+          <div className="card ">
+            <div className="card-body">
+              {/* <h3 className="card-title text-center">Enter OTP</h3> */}
+              <p className="text-center">
+                Please enter the OTP sent to <br />
+                {"+" + mobile}{" "}
+              </p>
 
-            <span>
-              <div className="d-flex justify-content-center mt-4">
-                <OtpInput
-                  value={otp}
-                  onChange={setOtp}
-                  numInputs={4}
-                  renderSeparator={<span className="p-2"> </span>}
-                  renderInput={(props) => (
-                    <input {...props} className="otp-input" />
-                  )}
-                />
-  
-              </div>
-              <div className="text-center mt-2">
+              <span>
+                <div className="d-flex justify-content-center mt-4">
+                  <OtpInput
+                    value={otp}
+                    onChange={setOtp}
+                    numInputs={4}
+                    renderSeparator={<span className="p-2"> </span>}
+                    renderInput={(props) => (
+                      <input {...props} className="otp-input" />
+                    )}
+                  />
+                </div>
+                <div className="text-center mt-2">
                   {error && <p className="text-danger ">{error.message}</p>}
-              </div>
-              <div className="mt-5 text-center">
-                <button
-                  onClick={onSubmit}
-                  type="submit"
-                  className="btn btn-primary btn-block"
-                  disabled={otp.length !== 4 ? true : false}
-                >
-                 Verify OTP
-                </button>
-              </div>
-            </span>
+                </div>
+                <div className="mt-4 text-center">
+                  <button
+                    onClick={onSubmit}
+                    type="submit"
+                    className="btn btn-primary btn-block"
+                    disabled={otp.length !== 4 ? true : false}
+                  >
+                    Verify OTP
+                  </button>
+                </div>
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <Modal size="sm" show={show}  animation={false}>
-        <Modal.Body style={{ background: "green" }} >
-          <p className="text-white text-center">Login successfully</p>
-        </Modal.Body>
-      </Modal>    </>
+    </>
   );
 };
 

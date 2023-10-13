@@ -100,8 +100,10 @@ const LoginForm = () => {
       </div>
 
       <Modal size="sm" show={show} animation={false}>
-        <Modal.Body >
-          <p className="text-center">Verification code sent to {'+' + mNumber}</p>
+        <Modal.Body>
+          <p className="text-center">
+            Verification code sent to {"+" + mNumber}
+          </p>
         </Modal.Body>
       </Modal>
     </>

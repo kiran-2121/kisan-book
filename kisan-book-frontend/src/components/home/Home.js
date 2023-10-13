@@ -21,7 +21,6 @@ const Home = () => {
             >
               <Nav defaultActiveKey="/home" className="flex-column">
                 <Nav.Link className="square border-bottom" as={Link} to="/home">
-                  
                   <Speedometer className="mx-1" size={22} /> DASHBOARD
                 </Nav.Link>
                 <Nav.Link as={Link} to="/home/seller">
