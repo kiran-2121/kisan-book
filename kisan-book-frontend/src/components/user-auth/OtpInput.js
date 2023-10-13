@@ -3,6 +3,7 @@ import OtpInput from "react-otp-input";
 import { useLocation,useNavigate } from "react-router-dom";
 import "./Login.scss";
 import ApiService from "../../service";
+import Modal from "react-bootstrap/Modal";
 
 const OtpInputs = () => {
   const navigate=useNavigate();
@@ -10,6 +11,15 @@ const OtpInputs = () => {
   const mobile = location.state?.mobile;
 
   const [otp, setOtp] = useState(0);
+  const [error,setError]=useState();
+  const [show, setShow] = useState(false);
+
+  const showSuccess = () => {
+    setShow(true);
+    setTimeout(() => {
+      navigate('/home');
+    }, 2000);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,13 +29,15 @@ const OtpInputs = () => {
       .then((responce) => {
         console.log(responce);
         localStorage.setItem("token", responce.token);
-        navigate('/')
-
-      })
-      .catch((error) => {
-        console.log( error);
+        showSuccess();
         
-      });
+      })
+      .catch((error)=>{
+        if(error.response){
+          console.log(error.response.data); 
+          setError(error.response.data); 
+          }
+      })
 
     // axios.post(`${process.env.REACT_APP_baseUrl}/api/auth/verify`,mobileNumber )
     // .then(
@@ -41,6 +53,7 @@ const OtpInputs = () => {
   };
 
   return (
+    <>
     <div className="row d-flex justify-content-center align-items-center vh-100">
       <div className="col-md-4 col-sm-6">
         <div className="card ">
@@ -59,6 +72,10 @@ const OtpInputs = () => {
                     <input {...props} className="otp-input" />
                   )}
                 />
+  
+              </div>
+              <div className="text-center mt-2">
+                  {error && <p className="text-danger ">{error.message}</p>}
               </div>
               <div className="mt-5 text-center">
                 <button
@@ -75,6 +92,12 @@ const OtpInputs = () => {
         </div>
       </div>
     </div>
+
+    <Modal size="sm" show={show}  animation={false}>
+        <Modal.Body style={{ background: "green" }} >
+          <p className="text-white text-center">Login successfully</p>
+        </Modal.Body>
+      </Modal>    </>
   );
 };
 

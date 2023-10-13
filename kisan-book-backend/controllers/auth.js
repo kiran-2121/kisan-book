@@ -67,7 +67,7 @@ const signup = async (req, res) => {
     const user = await User.findOne({ phoneNumber: phoneNumber });
   
     if (!user) {
-      return res.status(400).send({ message: "User not found" });
+      return res.status(400).send({ message: "User not resistered for this mobile number" });
     }
   
     const otp = otpGenerator.generate(4, {
@@ -113,7 +113,7 @@ const signup = async (req, res) => {
   
         return res.status(200).json({ message: "Login successfully", token });
       } else {
-        res.status(400).send("Invalid  OTP");
+        res.status(400).json({message:"Please enter correct OTP"});
       }
     }
   };

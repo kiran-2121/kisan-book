@@ -8,6 +8,7 @@ const ApiService = {
     );
     return response.data;
   },
+  
   submitOtp: async (data) => {
     const response = await axios.post(
       `${process.env.REACT_APP_baseUrl}/api/auth/verify`,
