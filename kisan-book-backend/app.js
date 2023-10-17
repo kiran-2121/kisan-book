@@ -3,7 +3,11 @@ require('express-async-errors');
 const express = require('express');
 const app = express();
 const {connectDB} = require('./db/connect');
-const authRouter =require("./routes/auth")
+const authRouter =require("./routes/auth");
+const sellerRouter =require("./routes/seller/sellerRoutes")
+
+
+
 const cors =require("cors")
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
@@ -15,6 +19,9 @@ app.use(express.json());
 // extra packages
 
 app.use("/api/auth",authRouter);
+
+app.use("/api/seller",sellerRouter);
+
 // app.use(notFoundMiddleware);
 // app.use(errorHandlerMiddleware);
 

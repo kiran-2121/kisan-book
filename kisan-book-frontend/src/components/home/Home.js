@@ -6,6 +6,8 @@ import { Speedometer } from "react-bootstrap-icons";
 import { PersonFillGear } from "react-bootstrap-icons";
 
 const Home = () => {
+
+  
   return (
     <>
       <div>
@@ -14,10 +16,11 @@ const Home = () => {
       <div>
         <Container fluid className={`sidebar-container`}>
           <Row>
+           
             <Col
               sm={3}
               md={2}
-              className="sidebar square border border-start-0 bg-light vh-100"
+              className="d-sm-none d-md-block sidebar square border border-start-0 bg-light vh-100 "
             >
               <Nav defaultActiveKey="/home" className="flex-column">
                 <Nav.Link className="square border-bottom" as={Link} to="/home">
@@ -31,8 +34,9 @@ const Home = () => {
                 </Nav.Link>
               </Nav>
             </Col>
+           
             <Col sm={9} md={10} className="content bg-white">
-              <p>Main Content</p>
+              
               <Outlet />
             </Col>
           </Row>

@@ -16,6 +16,12 @@ const ApiService = {
     );
     return response.data;
   },
+
+  fatchSellers: async () => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_baseUrl}/api/seller/getsellers?userId=652a9431a344a3687d3c8ff6&page=1&limit=3`);
+    return response.data;
+  }
 };
 
 export default ApiService;

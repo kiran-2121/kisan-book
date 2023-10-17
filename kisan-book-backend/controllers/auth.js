@@ -106,10 +106,11 @@ const signup = async (req, res) => {
     console.log(phoneNumber,otp)
   
     const user = await User.findOne({ phoneNumber: phoneNumber });
+    console.log(user);
   
     if (user) {
       if (otp == user.otp) {
-        const token = jwt.sign({ id: user.userId }, process.env.SECRET_KEY);
+        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
   
         return res.status(200).json({ message: "Login successfully", token });
       } else {
