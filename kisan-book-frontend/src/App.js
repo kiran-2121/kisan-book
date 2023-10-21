@@ -10,15 +10,14 @@ import AddSeller from './components/seller/AddSeller';
 
 const token = localStorage.getItem("token");
 
-
 function App() {
   const navigate = useNavigate();
  
-  useEffect(()=>{
-    if(!token){
-      navigate("/login");
-    }
-    },[token]);
+  // useEffect(()=>{
+  //   if(!token){
+  //     navigate("/login");
+  //   }
+  //   },[]);
 
   return (
     <div className='App'>

@@ -17,9 +17,9 @@ const OtpInputs = () => {
     const mobileNumber = { mobile: mobile, otp: otp };
 
     ApiService.submitOtp(mobileNumber)
-      .then((responce) => {
-        console.log(responce);
-        localStorage.setItem("token", responce.token);
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("token", response.token);
         navigate("/home");
       })
       .catch((error) => {

@@ -34,9 +34,9 @@ const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarColor01"></div>
-          <div className="text-end  mx-5 d-block d-sm-none d-md-block">
-            <div className="btn btn-light">
-              <div onClick={handleShow}>
+          <div className="text-end d-none d-md-block  mx-5 ">
+            <div className="btn btn-light ">
+              <div  onClick={handleShow}>
                 <BoxArrowRight className="mx-1" size={22} />{" "}
                 <span className="mx-1"> Logout </span>
               </div>

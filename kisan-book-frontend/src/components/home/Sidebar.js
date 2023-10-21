@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
+import { Speedometer } from "react-bootstrap-icons";
+import { PersonFillGear } from "react-bootstrap-icons";
+
+
+
 
 const Sidebar = () => {
-  const [expanded, setExpanded] = useState(true);
 
-  
 
   return (
-    <Container fluid className={`sidebar-container ${expanded ? 'expanded' : 'collapsed'}`}>
-      <Row>
-        <Col sm={3} md={2} className="sidebar square border border-start-0 vh-100 ">
-          <Nav defaultActiveKey="/home" className="flex-column">
-            <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/services">Services</Nav.Link>
-            <Nav.Link href="/contact">Contact</Nav.Link>
-          </Nav>
-        </Col>
-        <Col sm={9} md={10} className="content">
-          {/* Your main content goes here */}
-          <p>Main Content</p>
-        </Col>
-      </Row>
-    </Container>
+    <Nav defaultActiveKey="/home" className="flex-column">
+    <Nav.Link className="square border-bottom" as={Link} to="/home">
+      <Speedometer className="mx-1" size={22} /> DASHBOARD
+    </Nav.Link>
+    <Nav.Link as={Link} to="/home/seller">
+      <PersonFillGear className="mx-1" size={22} /> SELLER
+    </Nav.Link>
+    <Nav.Link as={Link} to="/home/buyer">
+      <PersonFillGear className="mx-1" size={22} /> BUYER
+    </Nav.Link>
+  </Nav>
   );
 };
 

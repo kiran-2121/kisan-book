@@ -23,6 +23,13 @@ const addSeller = async (req,res) =>{
         }
         
       });
+      const isSellerExist = await Seller.findOne({ primaryMobileNumber: seller.primaryMobileNumber });
+
+      if (isSellerExist) {
+        return res.status(400).json({ error: "Seller is already present" });
+      }
+    
+
       seller.save((err)=>{
         if(err){
             return res.status(500).send(err);
@@ -92,5 +99,40 @@ const getSellerRecords = async (req, res) => {
   
 };
 
-module.exports = { getSellerRecords,addSeller };
+const deleteSeller = async (req, res) => {
+  const id = req.query.sellerId;
+  console.log(id);
+
+  const seller = await Seller.findOne({ _id: id });
+  console.log(seller);
+
+  if (!seller) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+  await Seller.deleteOne({ _id: seller._id });
+
+
+  res.status(200).json({ message: "Deleted Successfully" });
+};
+
+const getRecordForUpdate = async (req, res) => {
+  const id = req.query.sellerId;
+  console.log(id);
+
+  const seller = await Seller.findOne({ _id: id });
+  console.log(seller);
+
+  if (!seller) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+
+  res.status(200).json(seller );
+};
+
+
+
+
+module.exports = { getSellerRecords,addSeller,deleteSeller,getRecordForUpdate };
 
